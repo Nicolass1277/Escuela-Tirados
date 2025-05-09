@@ -1,0 +1,120 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navigation') %>
+<!DOCTYPE html>
+<html lang="es">
+  <header class="bg-primary text-white text-center py-4">
+    <h1 >Videos</h1 >
+  </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/styles.css">
+  <style>
+    .card-info {
+      background: white;
+      padding: 30px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+    }
+    .btn-eliminar {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-eliminar:hover {
+      background-color: #c82333;
+    }
+
+    .galeria-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px;
+    }
+
+    .galeria-item {
+      width: 320px;
+    }
+
+    .galeria-item iframe,
+    .galeria-item video {
+      width: 100%;
+      height: 200px;
+      border-radius: 6px;
+    }
+
+    .text-warning {
+      color: #ffc107;
+    }
+
+    .form-videos {
+      margin: 20px 0;
+    }
+
+    .form-videos input, .form-videos button {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-info">
+    <h2 class="text-center text-warning">Videos actuales</h2>
+
+    <% if (user && user.rol === 'admin') { %>
+      <!-- Formulario para subir archivo -->
+      <div class="mb-4" style="max-width: 500px; margin: 0 auto;">
+        <form action="/videos" method="POST" enctype="multipart/form-data" class="form-videos">
+          <label for="video" class="form-label">Subir Video:</label>
+          <input type="file" name="video" id="video" class="form-control mb-2" required>
+          <button type="submit" class="btn btn-primary w-100">Agregar Video</button>
+        </form>
+      </div>
+    
+      <!-- Formulario para insertar enlace de YouTube -->
+      <div class="mb-4" style="max-width: 500px; margin: 0 auto;">
+        <form action="/videos" method="POST" enctype="multipart/form-data" class="form-videos">
+          <label for="youtube-link" class="form-label">Agregar enlace de YouTube:</label>
+          <input type="url" name="youtubeLink" id="youtube-link" placeholder="https://www.youtube.com/watch?v=..." class="form-control mb-2">
+          <button type="submit" class="btn btn-primary w-100">Agregar Enlace</button>
+        </form>
+      </div>
+    <% } %>
+    
+
+    <!-- Lista de videos -->
+    <div class="galeria-grid">
+      <% videos.forEach(video => { %>
+        <div class="galeria-item">
+          <% if (video.ruta.includes('youtube.com')) { %>
+            <iframe src="<%= video.ruta.replace('watch?v=', 'embed/') %>" frameborder="0" allowfullscreen></iframe>
+          <% } else { %>
+            <video src="<%= video.ruta %>" controls></video>
+          <% } %>
+
+          <% if (user && user.rol === 'admin') { %>
+            <form action="/videos/eliminar" method="POST" class="mt-2">
+              <input type="hidden" name="id" value="<%= video.id %>">
+              <button type="submit" class="btn-eliminar">Eliminar</button>
+            </form>
+          <% } %>
+        </div>
+      <% }) %>
+    </div>
+
+    <div class="text-center my-4">
+      <a href="/" class="btn btn-primary">Volver a Inicio</a>
+    </div>
+  </div>
+
+</body>
+</html>
+<%- include('../partials/footer') %>

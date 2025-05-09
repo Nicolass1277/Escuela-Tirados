@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Noticia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+<style>
+            .card-info {
+            background: white;
+            padding: 30px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+    }
+    form {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    form input[type="text"],
+    form textarea,
+    form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    form button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+
+    form img {
+        max-width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 15px;
+    }
+</style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Editar Directivo</h2>
+    <div class="card-info">
+    <form action="/nosotros/editar/<%= directivo.id %>" method="POST" enctype="multipart/form-data" class="row g-3">
+      <div class="col-md-4">
+        <input type="text" name="nombre" value="<%= directivo.nombre %>" class="form-control" placeholder="Nombre" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" name="cargo" value="<%= directivo.cargo %>" class="form-control" placeholder="Cargo" required>
+      </div>
+      <div class="col-md-4">
+        <input type="text" name="descripcion" value="<%= directivo.descripcion %>" class="form-control" placeholder="Descripción del rol" required>
+      </div>
+      <div class="col-md-6">
+        <label>Foto actual:</label><br>
+        <img src="<%= directivo.ruta %>" width="100" class="mb-3 rounded-circle">
+        <input type="file" name="foto" class="form-control" accept="image/*">
+      </div>
+      <div class="col-md-6 d-grid align-items-end">
+        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+      </div>
+    </form>
+    <div class="text-center mt-4">
+      <a href="/nosotros" class="btn btn-secondary">Volver</a>
+    </div>
+  </div>
+    </div>
+</body>
+</html>

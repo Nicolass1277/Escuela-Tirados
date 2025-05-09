@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Noticia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        form {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        form input[type="text"],
+        form textarea,
+        form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        form img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center">Editar Noticia</h1>
+
+    <form action="/noticias/editar/<%= noticia.id %>" method="POST" enctype="multipart/form-data" style="max-width: 600px; margin: 0 auto;">
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" name="titulo" value="<%= noticia.titulo %>" required>
+
+        <label for="contenido">Contenido:</label>
+        <textarea id="contenido" name="contenido" rows="5" required><%= noticia.contenido %></textarea>
+
+        <label for="autor">Autor:</label>
+        <input type="text" id="autor" name="autor" value="<%= noticia.autor %>" required>
+
+        <label for="imagen">Imagen Actual:</label>
+        <img src="<%= noticia.imagen_url %>" alt="Imagen de la noticia" style="max-width: 100%; margin-bottom: 10px;">
+
+        <label for="imagen">Cambiar Imagen:</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*">
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+        <button class="btn btn-secondary" onclick="window.location.href='/noticias'">Volver a Noticias</button>
+</body>
+</html>

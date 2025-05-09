@@ -1,0 +1,33 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navigation') %>
+
+<div class="container my-5">
+  <h2 class="mb-4 text-center" style="color: #004085;">
+    Resultados para: <span class="fw-bold text-dark">"<%= query %>"</span>
+  </h2>
+
+  <div class="alert alert-primary shadow-sm px-4 py-3" style="background-color: #e9f5ff; border-left: 5px solid #007bff;">
+    <p class="mb-0" style="color: #0056b3;"><%= respuesta %></p>
+  </div>
+
+  <% if (noticias.length > 0) { %>
+    <div class="row mt-4">
+      <% noticias.forEach(n => { %>
+        <div class="col-md-4 d-flex">
+          <div class="card shadow-sm mb-4 flex-fill">
+            <img src="<%= n.imagen_url || '/img/default.jpg' %>" class="card-img-top" alt="Imagen" style="max-height: 180px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title text-primary"><%= n.titulo %></h5>
+              <p class="card-text" style="font-size: 0.95rem;"><%= n.contenido %></p>
+              <p class="card-text"><small class="text-muted">Autor: <%= n.autor %></small></p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="text-center text-muted mt-4">No se encontraron noticias relacionadas.</p>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

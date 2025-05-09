@@ -1,0 +1,98 @@
+<style>
+  .navbar {
+    background-color: #0d47a1 !important;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+  .navbar-nav .dropdown:last-child {
+  margin-right: 2px;
+}
+.navbar-nav .nav-link,
+.navbar-nav .dropdown-toggle {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+
+
+  .navbar-brand,
+  .nav-link {
+    color: white !important;
+    font-size: 0.95rem;
+  }
+
+  .navbar-brand img {
+    height: 32px;
+    margin-right: 8px;
+  }
+
+.navbar-nav .dropdown:last-child {
+  margin-right: 20px;
+}
+
+
+  .form-control {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .dropdown-menu-dark .dropdown-item:hover {
+    background-color: #1565c0;
+    color: #fff;
+    font-weight: bold;
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg sticky-top" data-bs-theme="dark">
+  <div class="container-fluid">
+
+    <!-- Logo + Nombre -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/img/escudo.png" alt="Escudo">
+      <span class="fw-semibold">Colegio Antonio Tirados Lana</span>
+    </a>
+
+    <!-- Buscador -->
+    <form class="d-flex me-3" action="/buscar" method="GET">
+      <input class="form-control bg-dark text-white me-2" name="q" type="search" placeholder="Buscar...">
+      <button class="btn btn-outline-light" type="submit">Buscar</button>
+    </form>
+
+    <!-- Hamburguesa -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menú -->
+    <div class="collapse navbar-collapse" id="menuNav">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="/nosotros">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/galeria">Galería</a>
+        </li>
+        
+        <li class="nav-item dropdown me-3" >
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Más
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/noticias">Noticias</a></li>
+            <li><a class="dropdown-item" href="/videos">Videos</a></li>
+            <li><a class="dropdown-item" href="/login">Inicio De Sesion</a></li>
+            <li><a class="dropdown-item" href="/utilidades">Utilidades</a></li> 
+            <li><a class="dropdown-item" href="/actividades">Actividades</a></li>
+            <li><hr class="dropdown-divider"></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

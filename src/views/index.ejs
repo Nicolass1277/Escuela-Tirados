@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <%- include('partials/head') %>
+    <style>
+        body {
+          background-image: url("/img/trasfondo.png");
+        }
+
+      </style>
+      
+</head>
+<body>
+    <!-- Incluir la navegación desde partials -->
+    <%- include('partials/navigation') %>
+
+    <div class="contenido-principal">
+        <!-- Contenido principal -->
+        <div class="contenido">
+            <!-- Banner principal -->
+            <section class="banner">
+                <div class="banner-content">
+                    <img src="/img/escudo.png" alt="Escudo Escuela Tirados" class="escudo">
+                    <h1>Bienvenido a Escuela Antonio Tirados Lanas</h1>
+                    <p>El mejor lugar para cumplir tus metas y aprender sobre los desafíos del día a día. Comprometidos con la educación y el desarrollo de nuestra comunidad.</p>
+                </div>
+            </section>
+
+<!-- Noticias -->
+<section class="noticias container my-5">
+    <header class="bg-primary text-white text-center py-4">
+        <h1 >Noticias</h1>
+    <div class="row g-4 justify-content-center">
+        <% noticias.forEach(noticia => { %>
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="<%= noticia.imagen_url %>" class="card-img-top" alt="Imagen de la noticia">
+
+                    <div class="card-body">
+                        <h5 class="card-title"><%= noticia.titulo %></h5>
+                        <p class="card-text"><%= noticia.contenido %></p>
+                    </div>
+
+                    <div class="card-footer text-muted small">
+                        Autor: <%= noticia.autor %>
+                        Fecha: <%= new Date(noticia.fecha_publicacion).toLocaleDateString() %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</header>
+</section>
+
+
+
+            <!-- Ubicación -->
+            <section class="ubicacion">
+                <h2>Ubicación de la Escuela</h2>
+                <div class="ubicacion-content">
+                    <!-- Información de contacto -->
+                    <div class="contact-container">
+                        <h4>Contactos</h4>
+                        <div class="contact-item">
+                            <p><strong>Dirección:</strong> Colo Colo 594, Ovalle, Coquimbo</p>
+                        </div>
+                        <div class="contact-item">
+                            <p><strong>Teléfono:</strong>  (53) 262 0409</p>
+                        </div>
+                        <div class="contact-item">
+                            <p><strong>Email:</strong> contacto@escuelatirados.cl</p>
+                        </div>
+                        <div class="contact-item">
+                            <p><strong>Horario:</strong> Lunes a Viernes, 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+
+                    <!-- Mapa de la escuela -->
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.123456789012!2d-71.200123456789!3d-30.600123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x96b123456789abcdef%3A0x123456789abcdef!2sColo%20Colo%20594%2C%201842500%20Ovalle%2C%20Coquimbo!5e0!3m2!1ses!2scl!4v1681234567890" 
+                            width="100%" 
+                            height="300" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <% if (user && user.rol === 'admin') { %>
+            <aside class="accesos-rapidos">
+                <h2>Herramientas de Administración</h2>
+                <div class="accesos-grid">
+                    <a href="/noticias" class="btn">Noticias</a>
+                    <a href="/galeria" class="btn">Galería</a>
+                    <a href="/videos" class="btn">Videos</a>
+                    <a href="/actividades" class="btn">Actividades</a>
+                    <a href="/utilidades" class="btn">Utilidades</a>
+                    <a href="/registro" class="btn">Registro</a>
+                    <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+                </div>
+            </aside>
+        <% } %>
+    </div>
+    <%- include('partials/footer') %>
+</body>
+</html>

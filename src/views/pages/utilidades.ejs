@@ -1,0 +1,60 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navigation') %>
+
+<header class="bg-primary text-white text-center py-4">
+    <h1 >Utilidades Escolares</h1 >
+  </header>
+<div class="container my-5">
+    <% if (user && user.rol === 'admin') { %>
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-primary text-white">Agregar Nueva Utilidad</div>
+            <div class="card-body">
+                <form action="/utilidades" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="archivo" class="form-label">Archivo:</label>
+                        <input type="file" class="form-control" id="archivo" name="archivo" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Subir Utilidad</button>
+                </form>
+            </div>
+        </div>
+    <% } %>
+
+    <div class="row">
+        <% utilidades.forEach(utilidad => { %>
+            <div class="col-md-6 d-flex">
+                <div class="card mb-4 shadow-sm flex-fill">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary"><%= utilidad.nombre %></h5>
+                        <p class="card-text"><%= utilidad.descripcion %></p>
+                        <p class="card-text">
+                            <small>Fecha subida: <%= utilidad.fecha_subida.toISOString().slice(0,10) %></small>
+                        </p>
+                        <a href="<%= utilidad.ruta %>" target="_blank" class="btn btn-outline-primary btn-sm">Ver/Descargar</a>
+
+                        <% if (user && user.rol === 'admin') { %>
+                            <form action="/utilidades/eliminar" method="POST" style="display:inline;">
+                                <input type="hidden" name="id" value="<%= utilidad.id %>">
+                                <button type="submit" class="btn btn-danger btn-sm ms-2">Eliminar</button>
+                            </form>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="/" class="btn btn-primary">Volver a Inicio</a>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

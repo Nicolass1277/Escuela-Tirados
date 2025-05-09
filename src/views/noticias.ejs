@@ -1,0 +1,211 @@
+<%- include('partials/head') %>
+<%- include('partials/navigation') %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias</title>
+    <style>
+        /* Estilo para la sección de noticias */
+        .card-info {
+            background: white;
+            padding: 30px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+    }
+        .noticia {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+        .noticias h2 {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            margin-bottom: 20px;
+        }
+
+        .noticias-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .noticia {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .noticia:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .noticia h3 {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .noticia p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .noticia small {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .noticia button {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .noticia button.btn-warning {
+            background-color: #ffc107;
+            color: #fff;
+        }
+
+        .noticia button.btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .noticia button.btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .noticia button.btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .noticia button.btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .noticia button.btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        /* Estilo para el formulario de agregar noticias */
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        form label {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1 >Noticias</h1 >
+      </header>
+
+    <!-- Formulario para agregar noticias (solo administradores) -->
+    <% if (user && user.rol === 'admin') { %>
+        <div class="card-info">
+            
+            <h2>Agregar Nueva Noticia</h2>
+        <form action="/noticias" method="POST" enctype="multipart/form-data" style="text-align: center; margin: 10px;">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+            <br>
+            <label for="contenido">Contenido:</label>
+            <textarea id="contenido" name="contenido" rows="5" required></textarea>
+            <br>
+            <label for="autor">Autor:</label>
+            <input type="text" id="autor" name="autor" required>
+            <br>
+            <label for="imagen">Imagen:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*" required>
+            <br>
+            <button type="submit" class="btn btn-primary">Agregar Noticia</button>
+        </form>
+    </div>
+    <% } %>
+
+    <!-- Mostrar noticias -->
+    <div class="noticias-grid">
+        <% noticias.forEach(noticia => { %>
+            <div class="noticia">
+                <img src="<%= noticia.imagen_url %>" alt="Imagen de la noticia" class="noticia-img">
+                <h3><%= noticia.titulo %></h3>
+                <p><%= noticia.contenido %></p>
+                <p><small>Autor: <%= noticia.autor %> | Fecha: <%= noticia.fecha_publicacion.toLocaleDateString() %></small></p>
+
+                <% if (user && user.rol === 'admin') { %>
+                    <!-- Botón para editar noticia -->
+                    <form action="/noticias/editar/<%= noticia.id %>" method="GET" style="display: inline;">
+                        <button type="submit" class="btn btn-warning">Editar</button>
+                    </form>
+
+                    <!-- Botón para eliminar noticia -->
+                    <form action="/noticias/eliminar" method="POST" style="display: inline;">
+                        <input type="hidden" name="id" value="<%= noticia.id %>">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
+
+    <%- include('partials/footer') %>
+    <script>
+        if (typeof FB !== 'undefined') {
+            FB.XFBML.parse();
+        }
+    </script>
+</body> 
+</html>

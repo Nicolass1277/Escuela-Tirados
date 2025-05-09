@@ -1,0 +1,119 @@
+<%- include('../partials/head') %>
+<%- include('../partials/navigation') %>    
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Galería</title>
+    <style>
+            .card-info {
+            background: white;
+            padding: 30px;
+            margin: 40px auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+    }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .galeria-item {
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .galeria-item img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .galeria-item form {
+            margin-top: 10px;
+        }
+
+        .galeria-item button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .galeria-item button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1 >Galería de Imagenes</h1 >
+      </header>
+
+    <!-- Formulario para subir imágenes (solo administradores) -->
+    <% if (user && user.rol === 'admin') { %>
+        <div class="card-info">
+        <form action="/galeria" method="POST" enctype="multipart/form-data" style="text-align: center; margin: 20px;">
+            <label for="imagen" style="font-weight: bold;">Subir Imagen:</label>
+            <input type="file" name="imagen" id="imagen" required>
+            <button type="submit" class="btn btn-primary">Subir</button>
+        </form>
+        </div>
+    <% } %>
+
+    <h2>Imágenes actuales</h2>
+    <div class="galeria-grid">
+        <% imagenes.forEach(imagen => { %>
+            <div class="galeria-item">
+                <img src="<%= imagen.ruta %>" alt="Imagen">
+                <% if (user && user.rol === 'admin') { %>
+                    <form action="/galeria/eliminar" method="POST">
+                        <input type="hidden" name="id" value="<%= imagen.id %>">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+    <!-- Botón fuera del grid -->
+<div style="text-align: center; margin: 20px;">
+    <a href="/" class="btn btn-primary">Volver a Inicio</a>
+</div>
+</body>
+</html>
+<%- include('../partials/footer') %>

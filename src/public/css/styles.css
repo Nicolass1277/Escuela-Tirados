@@ -1,0 +1,597 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1, h2 {
+    color: #ffffff;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+h3 {
+    color: #0056b3;
+}
+
+a {
+    text-decoration: none;
+    color: #0056b3;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Ícono de Facebook en la navegación */
+.social-icons {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.social-icons a {
+    color: #4267B2; /* Azul de Facebook */
+    text-decoration: none;
+    margin: 0 5px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #365899; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Banner principal */
+.banner {
+    background-image: url('/img/fondo.jpg'); /* Imagen de fondo */
+    background-size: cover; /* Asegura que la imagen cubra toda la sección */
+    background-position: center; /* Centra la imagen */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    color: white;
+    text-align: center;
+    padding: 20px; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurece el fondo para resaltar el texto */
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea el contenido a la izquierda */
+    padding-left: 20px; /* Agrega un poco de espacio desde el borde izquierdo */
+}
+
+.banner-content .escudo {
+    width: 80px;
+    margin-bottom: 20px;
+    align-items: flex-start; /* Alinea el contenido a la izquierda */
+    
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+/* Accesos rápidos flotantes */
+.accesos-rapidos {
+    position: fixed; /* Hace que la sección sea flotante */
+    top: 20%; /* Ajusta la posición vertical */
+    right: 20px; /* Ajusta la posición horizontal desde el borde derecho */
+    background-color: #ecf0f1;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    max-width: 200px; /* Limita el ancho */
+}
+
+.accesos-rapidos h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.accesos-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.accesos-grid .btn {
+    background-color: #00b7f4;
+    color: rgb(87, 86, 86);
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.accesos-grid .btn:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+}
+
+/* Galería */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta el tamaño mínimo de las imágenes */
+    gap: 20px; /* Espaciado entre las imágenes */
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.galeria h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.galeria-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.galeria .imagen {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para las imágenes */
+    background-color: #f9f9f9; /* Fondo claro */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación al pasar el mouse */
+    text-align: center; /* Centra el texto */
+}
+
+.galeria .imagen:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+.galeria .imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para que se vea bien dentro del contenedor */
+    transition: opacity 0.3s ease; /* Animación de opacidad */
+}
+
+.galeria .imagen img:hover {
+    opacity: 0.9; /* Reduce ligeramente la opacidad al pasar el mouse */
+}
+
+.galeria .imagen .descripcion {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.galeria .acciones {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.galeria .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.galeria .btn-eliminar {
+    background-color: #e74c3c; /* Rojo */
+    color: white;
+}
+
+.galeria .btn-eliminar:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.galeria .btn-cambiar {
+    background-color: #3498db; /* Azul */
+    color: white;
+    cursor: pointer;
+}
+
+.galeria .btn-cambiar:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.btn-salir {
+    background-color: #e67e22; /* Naranja */
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-salir:hover {
+    background-color: #d35400;
+    transform: scale(1.05);
+}
+
+.btn-login {
+    padding: 8px 12px;
+    background-color: #3498db; /* Azul */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-login:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Pie de página */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer .redes-sociales a img {
+    width: 30px;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+.escudo {
+    width: 150px; /* Ajusta el tamaño según lo necesario */
+    height: auto; /* Mantiene la proporción de la imagen */
+    display: block;
+    margin: 0 auto; /* Centra la imagen */
+}
+
+form {
+    margin-top: 20px;
+}
+
+/* Estilos para la galería de videos */
+.videos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px;
+}
+
+.videos h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.videos .video {
+    background: #fff;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para los videos */
+    padding: 10px;
+    max-width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animación al pasar el mouse */
+}
+
+.videos .video:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+}
+
+.videos .video video,
+.videos .video iframe {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover; /* Ajusta el video para que se vea bien dentro del contenedor */
+}
+
+.videos .acciones {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.videos .btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.videos .btn-eliminar {
+    background-color: #e74c3c; /* Rojo */
+    color: white;
+}
+
+.videos .btn-eliminar:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+}
+
+.videos .btn-cambiar {
+    background-color: #3498db; /* Azul */
+    color: white;
+    cursor: pointer;
+}
+
+.videos .btn-cambiar:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* Misión */
+.mision {
+    padding: 20px;
+    background-color: #ecf0f1;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.mision h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.mision p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Misión y Visión */
+.mision-vision {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #ecf0f1;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mision, .vision {
+    flex: 1 1 45%; /* Ocupa el 45% del ancho disponible */
+    margin: 10px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mision h2, .vision h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.mision p, .vision p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Sección de ubicación */
+.ubicacion {
+    padding: 40px 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.ubicacion h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.ubicacion-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.contact-container {
+    background-color: #ffffff; /* Amarillo del escudo */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 40%;
+}
+
+.contact-container h4 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #000000; /* Texto oscuro */
+}
+
+.contact-item {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: #000000; /* Texto oscuro */
+}
+
+.contact-item p {
+    margin: 0;
+}
+
+.map-container {
+    flex: 2;
+    max-width: 60%;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor principal */
+.contenido-principal {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Contenido principal */
+.contenido {
+    flex: 3.5; /* Aumenta el ancho relativo */
+}
+
+/* Secciones generales */
+section {
+    margin-bottom: 30px; /* Aumenta el espacio entre secciones */
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    .contenido-principal {
+        flex-direction: column; /* Cambia a diseño vertical */
+    }
+
+    .accesos-rapidos {
+        position: static; /* Deja de ser sticky */
+        margin-top: 20px;
+        max-width: 100%; /* Ocupa todo el ancho disponible */
+    }
+}
+
+/* Formulario de videos */
+.form-videos {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-videos label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-videos input[type="file"],
+.form-videos input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.marco-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* ajusta según el tamaño de tu marco */
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para el marco */
+    background-color: #fff; /* Fondo blanco para el marco */
+  }
+  
+  .marco-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .card {
+    position: relative;
+    z-index: 2;
+    background-color: white;
+    padding: 30px 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para la tarjeta */
+    text-align: center;
+    margin: 0 auto; /* Centra la tarjeta */
+  }
+  
